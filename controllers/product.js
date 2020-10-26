@@ -4,7 +4,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const { exception } = require("console");
 const product = require("../models/product");
-const { sortBy } = require("lodash");
+// const { sortBy } = require("lodash");
 
 exports.getProductById = (req, res, next, id) => {
     Product.findById(id)
