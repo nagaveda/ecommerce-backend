@@ -20,10 +20,10 @@ router.get("/product/:productId", getProduct);
 router.get("/product/photo/:productId", photo);
 
 //delete routes
-router.delete("/product/:productId", isSignedIn, isAuthenticated, isAdmin, deleteProduct);
+router.delete("/product/:productId/:userId", isSignedIn, isAuthenticated, isAdmin, deleteProduct);
 
 //update route
-router.put("/product/:productId", isSignedIn, isAuthenticated, isAdmin, updateProduct);
+router.put("/product/:productId/:userId", isSignedIn, isAuthenticated, isAdmin, updateProduct);
 
 //listing route
 router.get("/products", getAllProducts);
