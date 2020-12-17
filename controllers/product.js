@@ -56,7 +56,7 @@ exports.createProduct = (req, res) => {
                      error: "File size too big"
                  });
              }
-             product.photo.data = file.photo.path;
+             product.photo.data = fs.readFileSync(file.photo.path);
              product.photo.contentType = file.photo.type;
 
          }
@@ -82,6 +82,7 @@ exports.getProduct = (req, res) => {
 exports.photo = (req, res, next) => {
     if(req.product.photo.data) {
         res.set("Content-Type", req.product.photo.contentType);
+        // console.log("fetching image", req.product.photo.data);
         return res.send(req.product.photo.data);
     }
     next();
