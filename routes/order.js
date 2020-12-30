@@ -19,7 +19,7 @@ router.post('/order/create/:userId',isSignedIn, isAuthenticated,pushOrderInPurch
 router.get('/order/all/:userId', isSignedIn, isAuthenticated, isAdmin, getAllOrders);
 
 //Status of order
-router.get('/order/status/:userId', isSignedIn, isAuthenticated, isAdmin, getOrderStatus);
-router.put('/order/:orderId/status/:userId', isSignedIn, isAuthenticated, isAdmin, updateStatus);
+router.get('/order/:orderId/status/:userId', isSignedIn, isAuthenticated, isAdmin, getOrderStatus);
+router.put('/order/:orderId/status/update/:userId', isSignedIn, isAuthenticated, isAdmin, updateStatus);
 
 module.exports = router;

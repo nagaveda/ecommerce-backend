@@ -10,6 +10,7 @@ exports.getOrderById = (req, res, next, id) => {
             });
         }
         req.order = order;
+        
         next();
     });
 };
@@ -41,20 +42,36 @@ exports.getAllOrders = (req, res) => {
 };
 
 exports.getOrderStatus = (req, res) => {
-    res.json(Order.schema.path("status").enumValues);
+    // return res.json(Order.schema.path("status").enumValues);
+    
+    Order.findById(req.order._id)
+    .exec((err, order) => {
+        
+        if(err){
+            console.log("TEST err", err);
+            return res.status(400).json({
+                error: "No order found in DB..."
+            });
+        }
+        
+        res.json(order);
+        
+    });
 };
 
 exports.updateStatus = (req, res) => {
-    Order.update(
-        {_id:req.body.orderId},
-        {$set: {status: req.body.status}},
-        (err, order) => {
-            if(err){
-                return res.status(400).json({
-                    error: "Error updating Order Status.."
-                });
-            }
-            res.json(order);
+    Order.findByIdAndUpdate(req.order._id, {status: req.body.status}, (err, order)=>{
+        if(err){
+            return res.status(400).json({
+                error: "Error updating Order Status.."
+            });
         }
-    );
+        console.log("order", req.body.status);
+        res.json(order);
+    });
+        // {_id:req.body.orderId},
+        // {$set: {status: req.body.status}},
+        // (err, order) => {
+            
+        // });
 };

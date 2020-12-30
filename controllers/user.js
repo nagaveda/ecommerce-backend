@@ -1,10 +1,10 @@
 const User = require("../models/user");
-const Order = require("../models/order");
+const {Order, ProductCart} = require("../models/order");
 
 exports.getUserById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
         if(err || !user){
-            return res.statu(400).json({
+            return res.status(400).json({
                 error:'No user found in DB..!'
             })
         }
@@ -33,6 +33,7 @@ exports.updateUser = (req, res) => {
                     error: "You're not authenticateed to update this user.."
                 });
             }
+            
             user.salt = undefined;
             user.encry_password = undefined;
             res.json(user);
@@ -49,7 +50,7 @@ exports.userPurchaseList = (req, res) => {
                 error:"NO order in this account..."
             })
         }
-
+        
         return res.json(order);
     })
 };
@@ -67,7 +68,9 @@ exports.pushOrderInPurchaseList = (req, res, next) => {
                 amount: req.body.order.amount,
                 transaction_id: req.body.order.transaction_id
 
-            })
+            }
+        );
+        
     });
 
     User.findOneAndUpdate(
@@ -83,8 +86,6 @@ exports.pushOrderInPurchaseList = (req, res, next) => {
             next();
         }
     );
-
-    
     
     
 };

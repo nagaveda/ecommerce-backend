@@ -1,4 +1,4 @@
-const stripe = require('stripe')("sk_test_51I1uftKu3498s3qiX3qrKbLGtCVoCXdB1TDbLhRDYnLoR8sf4b1A4jExPfBp5ZlLFoualzhSuSiZsCobIRBL9ORm00r4WquYac");
+const stripe = require('stripe')("sk_test_51I1uftKu3498s3qiNukj5ISrlVM3yKghaMnjq73c2ETYNB4qyai7lNTu0kfyRXvWltITTXJaJNteZPbTT8Kr3nfO007WNjRzi5");
 const {v4: uuid} = require("uuid"); 
 
 exports.makePayment = (req, res ) => {
